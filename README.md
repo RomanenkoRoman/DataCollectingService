@@ -34,4 +34,4 @@ data base with login=admin, password=admin
 9. Click on 'Log in' and enter login - 'admin', password - 'admin'.
 10. Click on 'Fields' and add some fields to form.
 11. Then go to http://localhost:9000 and fill them.
-12. go to http://localhost:9000/responses.
+12. Go to http://localhost:9000/responses.
