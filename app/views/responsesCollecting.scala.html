@@ -1,0 +1,158 @@
+@import models.entity.Field
+
+@(myField: play.data.Form[Field], list: java.util.List[Field])
+
+@main("Response collecting") {
+    <style>
+    #login {
+    visibility: visible ;
+    }
+    #logout {
+    visibility: visible ;
+    }
+    </style>
+    <head>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script>
+                $( function() {
+                    $( "#slider-range-max" ).slider({
+                        range: "max",
+                        min: 1,
+                        max: 10,
+                        value: 2,
+                        slide: function( event, ui ) {
+                            $( "#amount" ).val( ui.value );
+                        }
+                    });
+                    $( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+                } );
+        </script>
+    </head>
+    <br>
+    <br>
+    <center>
+        <table class="table table-view" id="tab">
+
+        @helper.form(action = routes.FieldController.addResponse(), '_id -> "addResponse") {
+            @for(field <- list) {
+
+                @if(field.getTypeEnum.getName.eq("Single line text")) {
+                    @if(field.isActive) {
+                        <tr>
+                            <td>
+                            @helper.inputText(myField(field.getLabel),
+                                '_label -> field.getLabel,
+                                '_id -> field.getId,
+                                'required -> field.isRequired)
+
+                            </td>
+                        </tr>
+                    }
+                }
+
+                @if(field.getTypeEnum.getName.eq("Check Box")) {
+                    @if(field.isActive) {
+                        <tr>
+                            <td>
+                            @helper.checkbox(field = myField(field.getLabel),
+                                '_label -> field.getLabel,
+                                '_id -> field.getId,
+                                'required -> field.isRequired)
+                            </td>
+                        </tr>
+                    }
+                }
+
+                @if(field.getTypeEnum.getName.eq("Combo box")) {
+                    @if(field.isActive) {
+                        <tr>
+                            <td>
+                            @helper.select(myField(field.getLabel),
+                                field.getListOfOptions.map(c => c.toString -> c.toString),
+                                '_label -> field.getLabel,
+                                '_id -> field.getId,
+                                'required -> field.isRequired)
+                            </td>
+                        </tr>
+                    }
+                }
+
+                @if(field.getTypeEnum.getName.eq("Multi line text")) {
+                    @if(field.isActive) {
+                        <tr>
+                            <td>
+                            @helper.textarea(field = myField(field.getLabel),
+                                '_label -> field.getLabel,
+                                '_id -> field.getId,
+                                'required -> field.isRequired)
+                            </td>
+                        </tr>
+                    }
+                }
+
+                @if(field.getTypeEnum.getName.eq("Radio button")) {
+                    @if(field.isActive) {
+                        <tr>
+                            <td>
+                            @helper.inputRadioGroup(myField(field.getLabel),
+                                field.getListOfOptions.map(c => c.toString -> c.toString),
+                                '_label -> field.getLabel,
+                                '_id -> field.getId,
+                                'required -> field.isRequired)
+                            </td>
+                        </tr>
+                    }
+                }
+
+                @if(field.getTypeEnum.getName.eq("Date")) {
+                    @if(field.isActive) {
+                        <tr>
+                            <td>
+                            @helper.input(myField(field.getLabel), '_id -> field.getId) { (id, name, value, args) =>
+                                <input type="date" name="@name" id="@id" value="@value" required="@field.isRequired">
+                            }
+                            </td>
+                        </tr>
+                    }
+                }
+                @if(field.getTypeEnum.getName.eq("Slider")) {
+                    @if(field.isActive) {
+                        <tr>
+                            <td>
+                            @helper.input(myField(field.getLabel)) { (id, name, value, args) =>
+                                <p>
+                                    <label for="amount">value:</label>
+                                    <input type="text" name="@name" id="amount" value="@value" readonly style="border:0 ; color:#f6931f ; font-weight:bold ;">
+                                </p>
+                                <div id="slider-range-max" style="width: 200px"></div>
+                            }
+                            </td>
+                        </tr>
+                    }
+                }
+                @if(field.getTypeEnum.getName.eq("Email")) {
+                    @if(field.isActive) {
+                        <tr>
+                            <td>
+                            @helper.input(myField(field.getLabel)) { (id, name, value, args) =>
+                                <input type="text" id="@id" name="@name" placeholder="E-mail" required="@field.isRequired"
+                                pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+\u0040[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
+                            }
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+            <tr>
+                <td>
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                    <input class="btn btn-warning" type="reset" value="Reset">
+                </td>
+            </tr>
+        }
+        </table>
+    </center>
+}

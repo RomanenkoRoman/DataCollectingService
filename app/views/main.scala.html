@@ -1,0 +1,69 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+
+<html>
+    <style>
+    #login {
+    position: absolute ;
+    right: 90px ;
+    top: 10px ;
+        visibility: hidden;
+    }
+    #logout {
+    position: absolute ;
+    right: 30px ;
+    top: 10px ;
+    visibility: hidden;
+
+    }
+    #left {
+    position: absolute ;
+    left: 30px ;
+    top: 10px ;
+    visibility: hidden;
+
+    }
+    #leftBorder {
+    position: absolute ;
+    left: 30px ;
+    top: 35px ;
+    visibility: hidden;
+
+    }
+
+    </style>
+
+    <head>
+        <title>@title</title>
+        <div id="left">
+            <a href="@routes.FieldController.goToFieldPage()">Fields</a>
+            <a href="@routes.FieldController.getResponses">Responses</a>
+            @*<input type="text"  id="responseCount" value="(3)" readonly style="border:0 ; color:#f6931f ; font-weight:bold ;">*@
+        </div>
+        <div id="login">
+            <a href="@routes.AuthenticationController.login()">Login</a>
+            </div>
+        <div id="logout">
+            <a href="@routes.AuthenticationController.logout()">Logout</a>
+
+        </div>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery-2.2.0.min.js")" type="text/javascript"></script>
+
+
+    </head>
+
+    <body>
+    @content
+    </body>
+
+</html>

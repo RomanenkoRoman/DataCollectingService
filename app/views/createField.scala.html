@@ -1,0 +1,83 @@
+@(createForm: play.data.Form[models.entity.Field], types: java.util.List[java.lang.String])
+
+    @main("Create/Edit Field") {
+        <style>
+        #left {
+        visibility: visible ;
+
+        }
+
+        #logout {
+        visibility: visible ;
+        }
+        </style>
+        <br>
+        <h2>Create/Edit</h2>
+        @helper.form(action = routes.FieldController.createField(),
+            'id -> "createFormId") {
+            <div class="container">
+                <table class="table table-view" >
+                    <tr>
+                        <td>
+                        @helper.inputText(createForm("Label"),
+                            '_label -> "Label:")
+                        </td>
+
+                        <td>
+                        @helper.checkbox(field = createForm("Required"))
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                        @helper.select(createForm("Type"), types.map(t => t -> t.toString),
+                            '_label -> "Type:",
+                            'id -> "dropdown_selector",
+                            'name -> "select")
+                        </td>
+
+                        <td>
+                        @helper.checkbox(field = createForm("Is Active"))
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        @helper.textarea(createForm("Options"),
+                            '_label -> "Options:",
+                            'id -> "options",
+                            'style -> "display: none")
+
+                        </td>
+                    </tr>
+
+
+                </table>
+
+                <input type="submit" class="btn btn-primary" value="Save">
+                <input type="button" class="btn btn-info" onclick='location.href="http://localhost:9000/fields"' value="Cancel" >
+
+            </div>
+
+            <script>
+                    $(document).ready( function ()
+                    {
+                        $("#options").attr("style","width:300px")
+                                .attr("style","height:75px")
+                                .hide();
+
+                        $('#dropdown_selector').change(function()
+                        {
+                            if(this.value == 'Radio button'){
+                                $("#options").attr("placeholder","option 1"+'\r\n'+"option 2"+'\r\n'+"option n").fadeIn();
+                            }else if(this.value == 'Combo box'){
+                                $("#options").attr("placeholder","option 1"+'\r\n'+"option 2"+'\r\n'+"option n").fadeIn();
+
+                            } else {
+                                $("#options").fadeOut();
+
+                            }
+                        });
+                    });
+            </script>
+        }
+    }

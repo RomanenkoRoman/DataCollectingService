@@ -1,0 +1,31 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+
+
+#GET         /                      controllers.FieldController.index()
+GET         /                         controllers.FieldController.getFieldsToResponse
+
+POST        /response                 controllers.FieldController.addResponse()
+GET        /response                 controllers.FieldController.addResponse()
+GET         /responses                controllers.FieldController.getResponses
+
+GET         /fields                   controllers.FieldController.goToFieldPage
+GET         /FIELDUUID                controllers.FieldController.createEditForm()
+POST        /request                  controllers.FieldController.createField()
+GET         /edit                     controllers.FieldController.editFieldForm
+POST        /edit                     controllers.FieldController.editField
+POST        /delete                   controllers.FieldController.deleteField()
+GET         /messagesWebSocket        controllers.FieldController.messagesWebSocket()
+
+GET         /congratulations          controllers.FieldController.congratulations()
+
+GET         /login                    controllers.AuthenticationController.login()
+GET         /logout                    controllers.AuthenticationController.logout()
+GET         /authenticate             controllers.AuthenticationController.authenticate
+
+
+GET         /assets/*file             controllers.Assets.at(path="/public", file)
+
+

@@ -1,0 +1,43 @@
+@import models.entity.Response
+@import models.entity.Field
+@import java.util.List
+
+@(responses: List[Response], fields: List[Field])
+
+@main("Responses") {
+    <style>
+    #left {
+    visibility: visible ;
+    }
+    #logout {
+    visibility: visible ;
+    }
+    </style>
+    <br>
+    <br>
+    <table id="tab" class="table table-view table-bordered">
+        <tr>
+        @for(field <- fields) {
+            <th>
+            @field.getLabel
+            </th>
+        }
+
+        </tr>
+        @for(response <- responses) {
+            <tr>
+            @for(field <- fields) {
+                <td>
+                @for(answer <- response.getAnswerList) {
+                    @if(field.getLabel.equals(answer.getLabel)) {
+                        @answer.getValue
+                    }
+                }
+                </td>
+            }
+            </tr>
+        }
+    </table>
+
+
+}

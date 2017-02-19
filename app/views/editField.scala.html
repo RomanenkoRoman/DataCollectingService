@@ -1,0 +1,97 @@
+@(createForm: play.data.Form[models.entity.Field], types: java.util.List[java.lang.String], field: models.entity.Field)
+
+    @main("Create/Edit Field") {
+        <style>
+        #login{
+        visibility: hidden;
+        }
+        </style>
+        <br>
+        <h2>Create/Edit</h2>
+
+        <form id="formId" method="post" action="@routes.FieldController.editField()">
+
+            <div class="container">
+                <table class="table table-view" >
+
+                    <tr>
+                        <td>
+                            <input title="id" hidden name="id" value="@field.getId">
+                            <label>Label:</label><br>
+                            <input name="label" type="text" value="@field.getLabel" title="label">
+                        </td>
+
+                        <td>
+                            Required
+                            @if(field.isRequired) {
+                                <input name="required" type="checkbox" checked title="required">
+                            } else {
+                                <input name="required" type="checkbox" title="required">
+                                }
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+
+                            <label>Type:</label><br>
+                            <select title="select" name="select">
+                            @for(t <- types) {
+                                @if(t == field.getTypeEnum.toString) {
+                                    <option selected name="@t">@t</option>
+                                } else {
+                                    <option name="@t">@t</option>
+                                }
+                            }
+
+                            </select>
+                        </td>
+
+                        <td>
+                            Is Active
+                            @if(field.isActive) {
+                                <input name="isActive" type="checkbox" checked title="isActive">
+                            } else {
+                                <input name="isActive" type="checkbox" title="isActive">
+                                }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea id="options" rows="3" hidden name="options">@field.getOptions</textarea>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <input type="submit" class="btn btn-primary" value="Save">
+
+                <form>
+                    <input type="button" class="btn btn-info" onclick='location.href="http://localhost:9000/fields"' value="Cancel" >
+                </form>
+
+            </div>
+        </form>
+
+        <script>
+                $(document).ready( function ()
+                {
+                    var option = $(this).find('option:selected').val();
+
+                    if (option == 'Radio button'|| option == 'Combo box'){
+                        $("#options").fadeIn(600);
+                    }else {
+                        $("#options").fadeOut(600);
+                    }
+
+                });
+
+                $('select').on('change', function() {
+                    if(this.value == 'Radio button'||this.value == 'Combo box'){
+                        $("#options").fadeIn(600);
+                    }else {
+                        $("#options").fadeOut(600);
+                    }
+                })
+        </script>
+    }

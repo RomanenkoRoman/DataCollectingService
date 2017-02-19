@@ -1,0 +1,91 @@
+@(fields: java.util.List[models.entity.Field])
+
+    @main("Fields") {
+        <style>
+        #left {
+        visibility: visible ;
+
+        }
+        #leftBorder {
+        visibility: visible ;
+
+
+        }
+        #logout {
+        visibility: visible ;
+        }
+        </style>
+        <br>
+        <br>
+        <form method="get" action="@routes.FieldController.createEditForm()" >
+            <div id="leftBorder">
+                <input type="submit" class="btn btn-success" value="+Add Field" >
+            </div>
+        </form>
+        <br>
+        <br>
+        <table class="table table-hover ">
+            <thead>
+                <th>Label</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Is Active</th>
+                <th/>
+                <th/>
+
+            </thead>
+            <tbody>
+            @for(field <- fields) {
+                <tr>
+                    <td>@field.getLabel</td>
+                    <td>@field.getTypeEnum</td>
+                    <td>
+                    @if(field.isRequired) {
+                        <input type="checkbox" checked title="required" disabled>
+                    } else {
+                        <input type="checkbox" title="required" disabled>
+                        }
+                    </td>
+                    <td>
+                    @if(field.isActive) {
+                        <input type="checkbox" checked title="isActive" disabled>
+                    } else {
+                        <input type="checkbox" title="isActive" disabled>
+                        }
+                    </td>
+
+                    <form method="get" action="@routes.FieldController.editFieldForm()">
+                        <td id="edit"><button name="edit id" value="@field.getId" class="btn-link">edit</button></td>
+                    </form>
+
+                    <td id="@field.getId"><button class="btn-link" id="@field.getId" name="delete">delete</button> </td>
+                </tr>
+            }
+            </tbody>
+
+        </table>
+
+
+    }
+    <script>
+        $(function(){
+            $('button.btn-link').click(function(){
+
+                var rowId = $(this).attr('id');
+                var nameOfButton = $(this).attr('name');
+
+                if (nameOfButton=='delete') {
+                    var result = confirm("Are you sure you want to delete this field?")
+                    if (result) {
+                        $.post("@routes.FieldController.deleteField()",
+                                {id: rowId},
+                                function () {
+                                    $('#' + rowId).parent().css({"background-color": "yellow"});
+                                    $('#' + rowId).parent().hide(600);
+                                });
+                    }
+                }
+
+            });
+        });
+</script>
