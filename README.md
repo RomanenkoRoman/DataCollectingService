@@ -1,4 +1,4 @@
-# Data Collection Service
+# Data Collecting Service
 
 ## Technologies:
 1. Java 8
