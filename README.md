@@ -27,7 +27,7 @@ data base with login=admin, password=admin
 2. Unzip it.
 3. Open the console in the project directory.
 4. Enter without the quotes 'sbt'
-5. When the loading is stopped: enter 'compile' without quotes.
+5. When the loading is ends: enter 'compile' without quotes.
 6. After successful compilation: enter 'run' without quotes.
 7. Run the sql script (ADD_ADMIN_SCRIPT.SQL).
 8. Then open in your browser 'localhost:9000'.
