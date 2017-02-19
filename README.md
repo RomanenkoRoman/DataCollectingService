@@ -12,12 +12,26 @@ Form for data collection will have generic number of fields.
 Field is an entity from database.
 
 ## Application consist of 4 pages:
-1. List of field page. 
-2. Field create/edit page. 
-3. Responses page. 
-4. Response collecting page. 
+1. List of field page. (http://localhost:9000/fields)
+2. Field create/edit page. (http://localhost:9000/FIELDUUID)
+3. Responses page. (http://localhost:9000/responses)
+4. Response collecting page. (http://localhost:9000)
 
 The application have the roles distinction. There is 2 roles accessible - Admin and Anonymous User. The administrator is redefined in the database. An application authorization is available for Admin. Only admin have access to pages such as List of field page, Field create/edit page, Responses page. Anonymous User have access only to Response collecting page.
 
 In the root of project there is sql script, which adds admin record to
 data base with login=admin, password=admin
+
+## To run application:
+1. Download ZIP
+2. Unzip it.
+3. Open the console in the project directory.
+4. Enter without the quotes 'sbt'
+5. When the loading is stopped: enter 'compile' without quotes.
+6. After successful compilation: enter 'run' without quotes.
+7. Run the sql script (ADD_ADMIN_SCRIPT.SQL).
+8. Then open in your browser 'localhost:9000'.
+9. Click on 'Log in' and enter login - 'admin', password - 'admin'.
+10. Click on 'Fields' and add some fields to form.
+11. Then go to http://localhost:9000 and fill them.
+12. go to http://localhost:9000/responses.
