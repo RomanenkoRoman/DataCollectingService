@@ -1,8 +1,8 @@
 Technologies:
-1) Java 8. 
-2) Hibernate 5.x 
-3) Play Framework 2.5.x (scala-templating). 
-4) Database: PostgreSQL 9.x 
+1) Java 8, 
+2) Hibernate 5.x, 
+3) Play Framework 2.5.x (scala-templating), 
+4) Database: PostgreSQL 9.x, 
 5) Bootstrap, HTML, CSS, JavaScript/JQuery. 
 
 Application is designed to collect data from users. 
