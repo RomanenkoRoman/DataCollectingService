@@ -29,9 +29,10 @@ data base with login=admin, password=admin
 4. Enter without the quotes 'sbt'
 5. When the loading is ends: enter 'compile' without quotes.
 6. After successful compilation: enter 'run' without quotes.
-7. Run the sql script (ADD_ADMIN_SCRIPT.SQL).
-8. Then open in your browser 'localhost:9000'.
-9. Click on 'Log in' and enter login - 'admin', password - 'admin'.
-10. Click on 'Fields' and add some fields to form.
-11. Then go to http://localhost:9000 and fill them.
-12. Go to http://localhost:9000/responses.
+7. If your settings of database are not default, change them in the file conf/application.conf on lines 337-340
+8. Run the sql script (ADD_ADMIN_SCRIPT.SQL).
+9. Then open in your browser 'localhost:9000'.
+10. Click on 'Log in' and enter login - 'admin', password - 'admin'.
+11. Click on 'Fields' and add some fields to form.
+12. Then go to http://localhost:9000 and fill them.
+13. Go to http://localhost:9000/responses.
