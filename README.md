@@ -26,7 +26,7 @@ data base with login=admin, password=admin
 1. Download ZIP
 2. Unzip it.
 3. Open the console in the project directory.
-4. Enter without the quotes 'sbt'
+4. Enter without the quotes 'sbt' (it can take for several minutes)
 5. When the loading is ends: enter 'compile' without quotes.
 6. After successful compilation: enter 'run' without quotes.
 7. If your settings of database are not default, change them in the file conf/application.conf on lines 337-340
